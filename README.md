@@ -1,46 +1,19 @@
-# Getting Started with Create React App
+오리지널 소스 : https://github.com/megaptera-kr/micro-store-tdd-feconf2022
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# UseSyncExternalStore를 활용하여 전역상태 및 비즈니스로직을 CLASS로 분리하기
 
-## Available Scripts
+### 왜 하필 CLASS인가?
+CLASS는 OOP식으로 비즈니스 로직을 처리할때 가장 쉽게 사용되고 JS에서는 아마 유일하다고 봐야된다. 각 클래스와 객체 추상을 통해서 CLASS간의
+비즈니스 로직 처리는 JAVA를 썻던 개발자들에게는 매우 친숙한 방법이다. 단순 함수로 빼기보다는 CLASS로 정리하는게 확실히 유지보수 측면에서 이득이 
+크다.
 
-In the project directory, you can run:
 
-### `npm start`
+### 전역상태를 쓰는것보다 장점이 무엇인가?
+현재 리액트의 상태관리 추세는 무분별한 전역관리보다는 최대한 깔끔한 구조로 props drilling을 최소화 하는 방향을 작성된다. 요즘 추세는 recoil이나
+zustard같이 가벼운 라이브러리를 이용하여 상태관리하는 추세이다보니 최대한 가벼운 라이브러리가 대세이다. 하지만 이와같은 라이브러리는 항상 메모리누수나
+기타 다른 문제가 동반되는 상황이 많고 불필요한 기능이 필요한경우가 상당히많다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 테스팅이 매우 편리하다.
+단순 기타 다른 로직없이 바로 store 와 model을 참조하기 때문에 store는 정상적으로 이벤트가 발생했는지만 확인하면되고 model에서 비즈니스 로직에
+대한 모든 테스팅을 진행할 수 있다. mock 작업도 필요없으며 매우 간단하고 쉽게 진행된다. 이러한점은 TDD나 테스트코드 작성시 매우 편리하게 다가왔고
+생산성증가를 가지고왔다.
